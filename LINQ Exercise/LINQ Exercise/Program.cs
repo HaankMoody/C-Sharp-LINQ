@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static LINQ_Exercise.Program;
 
 namespace LINQ_Exercise
 {
@@ -176,7 +177,7 @@ namespace LINQ_Exercise
             foreach(var y in upperCase)
             {
                 Console.WriteLine(y);
-            }*/
+            }
 
             //Aufgabe 11: Speichere die Werte des angegeben String[] in einem gesamten String mit einem Komma separiert.
             //Gebe diesen String anschließend aus.
@@ -185,10 +186,49 @@ namespace LINQ_Exercise
 
             string newstring = String.Join(", ", arr1.Select(s => s.ToString()));
 
-            Console.WriteLine(newstring);
+            Console.WriteLine(newstring);*/
+
+            //Aufgabe 12: 
+            List<Students> stulist = new List<Students>();
+            stulist.Add(new Students { StuId = 1, StuName = "Joseph", GrPoint = 800 });
+            stulist.Add(new Students { StuId = 2, StuName = "Alex", GrPoint = 458 });
+            stulist.Add(new Students { StuId = 3, StuName = "Harris", GrPoint = 900 });
+            stulist.Add(new Students { StuId = 4, StuName = "Taylor", GrPoint = 900 });
+            stulist.Add(new Students { StuId = 5, StuName = "Smith", GrPoint = 458 });
+            stulist.Add(new Students { StuId = 6, StuName = "Natasa", GrPoint = 700 });
+            stulist.Add(new Students { StuId = 7, StuName = "David", GrPoint = 750 });
+            stulist.Add(new Students { StuId = 8, StuName = "Harry", GrPoint = 700 });
+            stulist.Add(new Students { StuId = 9, StuName = "Nicolash", GrPoint = 597 });
+            stulist.Add(new Students { StuId = 10, StuName = "Jenny", GrPoint = 750 });
+
+            Console.WriteLine($"Bitte nenne mir eine Zahl zwischen 1 und 6:");
+            int eingabe = Convert.ToInt32(Console.ReadLine());
+
+            switch (eingabe)
+            {
+                case 1:
+                    var maxQuery = from points in stulist
+                                   where points.GrPoint > 800
+                                   select points;
+                    break;
+
+                case 2:
+                    var maxQuerry = from points in stulist
+                                    where points.GrPoint < 900 && points.GrPoint >= 800
+                                    select points;
+                    break;
+
+                case 3:
+                    var maxQuerry = from points in stulist
+                                    where points.GrPoint == 750
+                                    select points;
+                    break;
+
+                case 4:
 
 
 
+            }
         }
     }
 }
