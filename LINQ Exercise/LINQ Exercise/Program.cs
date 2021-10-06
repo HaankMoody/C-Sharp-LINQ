@@ -90,6 +90,32 @@ namespace LINQ_Exercise
             Console.ReadKey();
             Console.WriteLine();
 
+            //Aufgabe 7:Gebe die Städte aus, welche mit einem bestimmten Buchstaben beginnen,
+            //sowie mit einem weiteren Buchstaben Enden. Gestalte es variabel.
+
+            string[] cities = new string[] {  "ROME", "LONDON", "NAIROBI", "CALIFORNIA", "ZURICH", 
+                                                    "NEW DELHI", "AMSTERDAM", "ABUDHABI", "PARIS" };
+            Console.WriteLine($"Gebe einen Anfangsbuchstaben ein:");
+            string firstLetter = Console.ReadLine().ToUpper();
+            Console.WriteLine($"Gebe den Endbuchstaben ein:");
+            string lastLetter = Console.ReadLine().ToUpper();
+
+            var Ausgabe1 = cities.Where(a => a.StartsWith(firstLetter)).Select(a => a).ToList();
+            var Ausgabe2 = Ausgabe1.Where(a => a.EndsWith(lastLetter)).Select(a => a).ToList();
+
+            foreach(string s in Ausgabe2)
+            {
+                Console.WriteLine(s);
+            }
+            Console.ReadKey();
+            Console.ReadLine();
+
+            //Aufgabe 8: Lasse den Nutzer eine Zahl eingeben, wie viele Einträge er hinzufügen möchte. 
+            //Frage anschließend nach den jeweiligen Werten, bis die Anzahl der Listelemente erreicht ist. 
+            //Frage Anschließend nach einer Zahl und gebe nur die Elemente der Liste aus, welche größer als die Eingabe ist.
+
+
+
         }
     }
 }
