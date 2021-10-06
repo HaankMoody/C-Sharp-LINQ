@@ -158,7 +158,7 @@ namespace LINQ_Exercise
                 Console.WriteLine(x);
             }
             Console.ReadKey();
-            Console.WriteLine();*/
+            Console.WriteLine();
 
 
             //Aufgabe 10: Lasse den Nutzer einen Satz eingeben, in welchen er bestimmte Wörter in UPPER CASE schreibt. 
@@ -176,7 +176,19 @@ namespace LINQ_Exercise
             foreach(var y in upperCase)
             {
                 Console.WriteLine(y);
-            }
+            }*/
+
+            //Aufgabe 11: Speichere die Werte des angegeben String[] in einem gesamten String mit einem Komma separiert.
+            //Gebe diesen String anschließend aus.
+            
+            string[] arr1 = new string[4] { "cat", "dog", "cow", "tiger" };
+
+            string newstring = String.Join(", ", arr1.Select(s => s.ToString()));
+
+            Console.WriteLine(newstring);
+
+
+
         }
     }
 }
