@@ -9,7 +9,7 @@ namespace LINQ_Exercise
         static void Main(string[] args)
         {
             //Aufgabe 1: Gebe aus einer Liste von Zahlen nur die Zahlen aus, welche durch 2 Teilbar sind.
-            int[] numbers = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            /*int[] numbers = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             var numQuery = from num in numbers
                            where num % 2 == 0
@@ -158,7 +158,25 @@ namespace LINQ_Exercise
                 Console.WriteLine(x);
             }
             Console.ReadKey();
-            Console.WriteLine();
+            Console.WriteLine();*/
+
+
+            //Aufgabe 10: Lasse den Nutzer einen Satz eingeben, in welchen er bestimmte Wörter in UPPER CASE schreibt. 
+            //Gebe anschließend nur die Wörter aus welche komplett mit UPPERCASE geschrieben wurden.
+
+            Console.WriteLine($"Bitte gebe einen Satz ein und schreibe hierbei ein paar Wörter in UPPERCASE:");
+            string str = Console.ReadLine();
+            string transformed = str.Replace(",", "").Replace(".", "").Replace(";", "").Replace(":", "").Replace("!", "").Replace("?", "");
+
+            //List<string> words = new List<string>() { str };
+            var upperCase = transformed.Split(' ').Where(x => String.Equals(x, x.ToUpper()));
+
+            Console.WriteLine($"Das sind deine Großgeschriebenen Wörter:");
+
+            foreach(var y in upperCase)
+            {
+                Console.WriteLine(y);
+            }
         }
     }
 }
