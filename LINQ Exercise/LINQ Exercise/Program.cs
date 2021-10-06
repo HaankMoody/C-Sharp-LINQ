@@ -122,11 +122,9 @@ namespace LINQ_Exercise
             int i = 0;
             do
             {
-
                 Console.WriteLine($"Welche Zahlen möchtest du deiner Liste hinzufügen?");
                 anzahlEintraege.Add(Convert.ToInt32(Console.ReadLine()));
                 i++;
-
             }
             while (i < anzahlEintrag);
 
@@ -142,6 +140,23 @@ namespace LINQ_Exercise
                 Console.WriteLine(x);
             }
 
+            Console.ReadKey();
+            Console.WriteLine();
+
+            //Aufgabe 9: Frage den Nutzer wie viele Einträge er ausgeben möchte,
+            //sortiere die Liste den Werten nach absteigend und
+            //gebe anschließend die n Einträge aus die der Nutzer sehen möchte. (Verwende die .Take() - Methode)
+
+            Console.WriteLine($"Wie viele Einträge möchtest du ausgeben=?");
+            int ausgabeAnzahlEintrag = Convert.ToInt32(Console.ReadLine());
+
+
+            var output = anzahlEintraege.OrderByDescending(zahl => zahl).Take(ausgabeAnzahlEintrag).ToList();
+
+            foreach(var x in output)
+            {
+                Console.WriteLine(x);
+            }
             Console.ReadKey();
             Console.WriteLine();
         }
