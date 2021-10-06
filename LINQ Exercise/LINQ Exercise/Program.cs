@@ -114,8 +114,36 @@ namespace LINQ_Exercise
             //Frage anschließend nach den jeweiligen Werten, bis die Anzahl der Listelemente erreicht ist. 
             //Frage Anschließend nach einer Zahl und gebe nur die Elemente der Liste aus, welche größer als die Eingabe ist.
 
+            Console.WriteLine($"Wie viele Einträge möchtest du in deiner Liste speichern?");
 
+            int anzahlEintrag = Convert.ToInt32(Console.ReadLine());
 
+            List<int> anzahlEintraege = new List<int>(anzahlEintrag);
+            int i = 0;
+            do
+            {
+
+                Console.WriteLine($"Welche Zahlen möchtest du deiner Liste hinzufügen?");
+                anzahlEintraege.Add(Convert.ToInt32(Console.ReadLine()));
+                i++;
+
+            }
+            while (i < anzahlEintrag);
+
+            Console.WriteLine($"Nenn mir eine Zahl:");
+            int zahl = Convert.ToInt32(Console.ReadLine());
+
+            var ausgabe = from list in anzahlEintraege
+                          where list >= zahl
+                          select list;
+
+            foreach (var x in ausgabe)
+            {
+                Console.WriteLine(x);
+            }
+
+            Console.ReadKey();
+            Console.WriteLine();
         }
     }
 }
