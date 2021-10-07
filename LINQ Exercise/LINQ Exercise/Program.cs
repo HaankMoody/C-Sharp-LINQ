@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using static LINQ_Exercise.Program;
@@ -301,35 +302,41 @@ namespace LINQ_Exercise
 
             //var xxxx = result1.Concat(result2);
 
-            var zzzz = from charackter in set1
+            /*var zzzz = from charackter in set1
                        from i in set2
                        group charackter by i into newGroup
                        //orderby newGroup.Key
-                       select newGroup;
+                       select newGroup;*/
 
-            List<var> 
+            //List<string> num = set2.OfType<string>().ToList();
 
-            foreach(var pp in zzzz)
+            //List<int> lst = set1.OfType<int>().ToList();
+
+            IEnumerator xEnumerator = set1.GetEnumerator();
+            xEnumerator.Reset();
+            while (xEnumerator.MoveNext())
             {
-                Console.WriteLine(pp);
+                Console.WriteLine(xEnumerator.Current);
             }
 
+            var xyz = from a in set2
+                      from b in xEnumerator
+                      select a + b;
+
+
+
+            /*foreach (var pp in zzzz)
+            {
+                Console.WriteLine(pp);
+            }*/
             //var yyyy = xxxx.Aggregate((concat, name) => (char)(concat + name));
 
             //Console.WriteLine(zzzz);
 
             //var result1 = set1.Aggregate((concat, name) => concat + name);
-
-
-
             //set1 = set1.Concat(result2).ToArray();
-
-            
             //Console.WriteLine(result1);
             //Console.WriteLine(result2);
-            
-
-
         }
         static void Aufgabe17()
         {
