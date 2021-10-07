@@ -22,7 +22,8 @@ namespace LINQ_Exercise
             //Aufgabe12();
             //Aufgabe13();
             //Aufgabe14und15();
-            Aufgabe16und17();
+            Aufgabe16();
+            //Aufgabe17();
         }
         static void Aufgabe1()
         {
@@ -290,25 +291,58 @@ namespace LINQ_Exercise
                 Console.WriteLine(x);
             }
         }
-        static void Aufgabe16und17()
+        static void Aufgabe16()
         {
             //Verkette die zwei Arrays indem das erste Element der ersten Liste mit dem ersten Element der zweiten Liste(2.Element der 1.Liste mit 2.Element der 2.Liste ….) als String gespeichert wird. 
             var set1 = new string[] { "X", "Y", "Z" };
             var set2 = new int[] { 1, 2, 3 };
+            var result1 = string.Join("", set1).ToCharArray();
+            var result2 = string.Join("", set2).ToCharArray();
 
-            
+            //var xxxx = result1.Concat(result2);
+
+            var zzzz = from charackter in set1
+                       from i in set2
+                       group charackter by i into newGroup
+                       //orderby newGroup.Key
+                       select newGroup;
+
+            List<var> 
+
+            foreach(var pp in zzzz)
+            {
+                Console.WriteLine(pp);
+            }
+
+            //var yyyy = xxxx.Aggregate((concat, name) => (char)(concat + name));
+
+            //Console.WriteLine(zzzz);
 
             //var result1 = set1.Aggregate((concat, name) => concat + name);
-            var result2 = string.Join("", set2).ToArray();
 
-            set1 = set1.Concat(result2).ToArray();
+
+
+            //set1 = set1.Concat(result2).ToArray();
 
             
-            Console.WriteLine(result1);
-            Console.WriteLine(result2);
+            //Console.WriteLine(result1);
+            //Console.WriteLine(result2);
             
 
 
+        }
+        static void Aufgabe17()
+        {
+            var set1 = new string[] { "X", "Y", "Z" };
+            var set2 = new int[] { 1, 2, 3 };
+
+            var queryTest = from charackter in set1
+                            from sequence in set2
+                            select charackter + sequence;
+
+            var testtest = queryTest.Aggregate((concat, name) => concat + name);
+
+            Console.WriteLine(testtest);
         }
     }
 }
