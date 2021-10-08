@@ -23,8 +23,18 @@ namespace LINQ_Exercise
             //Aufgabe12();
             //Aufgabe13();
             //Aufgabe14und15();
-            Aufgabe16();
+            //Aufgabe16();
             //Aufgabe17();
+            //AufgabeSheet1();
+            //AufgabeSheet2();
+            //AufgabeSheet3();
+            //AufgabeSheet20();
+            //AufgabeSheet21();
+            //AufgabeSheet22();
+            //AufgabeSheet25();
+            //AufgabeSheet26();
+            //AufgabeSheet27();
+            AufgabeSheet28();
         }
         static void Aufgabe1()
         {
@@ -297,46 +307,15 @@ namespace LINQ_Exercise
             //Verkette die zwei Arrays indem das erste Element der ersten Liste mit dem ersten Element der zweiten Liste(2.Element der 1.Liste mit 2.Element der 2.Liste ….) als String gespeichert wird. 
             var set1 = new string[] { "X", "Y", "Z" };
             var set2 = new int[] { 1, 2, 3 };
-            var result1 = string.Join("", set1).ToCharArray();
-            var result2 = string.Join("", set2).ToCharArray();
+            //var result1 = string.Join("", set1).ToCharArray();
+            //var result2 = string.Join("", set2).ToCharArray();
 
-            //var xxxx = result1.Concat(result2);
+            var query = set1.Select((listone, index) => (listone, set2[index]));
 
-            /*var zzzz = from charackter in set1
-                       from i in set2
-                       group charackter by i into newGroup
-                       //orderby newGroup.Key
-                       select newGroup;*/
-
-            //List<string> num = set2.OfType<string>().ToList();
-
-            //List<int> lst = set1.OfType<int>().ToList();
-
-            IEnumerator xEnumerator = set1.GetEnumerator();
-            xEnumerator.Reset();
-            while (xEnumerator.MoveNext())
+            foreach (var x in query)
             {
-                Console.WriteLine(xEnumerator.Current);
+                Console.WriteLine(x);
             }
-
-            var xyz = from a in set2
-                      from b in xEnumerator
-                      select a + b;
-
-
-
-            /*foreach (var pp in zzzz)
-            {
-                Console.WriteLine(pp);
-            }*/
-            //var yyyy = xxxx.Aggregate((concat, name) => (char)(concat + name));
-
-            //Console.WriteLine(zzzz);
-
-            //var result1 = set1.Aggregate((concat, name) => concat + name);
-            //set1 = set1.Concat(result2).ToArray();
-            //Console.WriteLine(result1);
-            //Console.WriteLine(result2);
         }
         static void Aufgabe17()
         {
@@ -350,6 +329,221 @@ namespace LINQ_Exercise
             var testtest = queryTest.Aggregate((concat, name) => concat + name);
 
             Console.WriteLine(testtest);
+        }
+        static void AufgabeSheet1()
+        {
+            int[] digits = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            var query = from num in digits
+                        where (num % 2) == 0
+                        select num;
+
+
+
+            foreach (var xy in query)
+            {
+                Console.WriteLine(xy);
+            }
+        }
+        static void AufgabeSheet2()
+        {
+            int[] digits = new int[] { 0, -1, 2, 3, -4, 5, -6, 7, -8, 9, 10, 11 };
+
+            var query = from num in digits
+                        where num > 0
+                        where num < 12
+                        select num;
+
+            foreach(var y in query)
+            {
+                Console.WriteLine(y);
+            }
+
+        }
+        static void AufgabeSheet3()
+        {
+            int[] digits = new int[] { 2, 5, 6, 8, 9, 10, 15 };
+
+            var query = from num in digits
+                        where num * num > 40
+                        select num;
+
+            foreach(var x in query)
+            {
+                Console.WriteLine($"{x} => {x * x}");
+            }
+        }
+        static void AufgabeSheet20()
+        {
+            List<string> listOfString = new List<string>();
+            listOfString.Add("m");
+            listOfString.Add("n");
+            listOfString.Add("o");
+            listOfString.Add("p");
+            listOfString.Add("q");
+
+            listOfString.RemoveAt(3);
+
+            foreach(var sign in listOfString)
+            {
+                Console.WriteLine(sign);
+            }
+        }
+        static void AufgabeSheet21()
+        {
+            List<string> listOfString = new List<string>();
+            listOfString.Add("m");
+            listOfString.Add("n");
+            listOfString.Add("o");
+            listOfString.Add("p");
+            listOfString.Add("q");
+
+            listOfString.RemoveRange(1, 3);
+
+            foreach(var sign in listOfString)
+            {
+                Console.WriteLine(sign);
+            }
+        }
+        static void AufgabeSheet22()
+        {
+            string[] str = new string[] { "this", "is", "a", "string" };
+
+            Console.WriteLine("Input the minimu Lenght the string you want to find:");
+            int lenght = Convert.ToInt32(Console.ReadLine());
+
+            var query = from s in str
+                        where s.Length >= lenght
+                        orderby s.Length
+                        select s;
+
+            foreach(var y in query)
+            {
+                Console.WriteLine(y);
+            }
+        }
+        internal class Item_mast
+        {
+            public int ItemId { set; get; }
+            public string ItemDes { set; get; }
+
+            
+        }
+        internal class Purchase
+        {
+            public int InvNo { get; set; }
+            public int ItemId { get; set; }
+            public int PurQty { get; set; }
+
+            
+        }
+        static void AufgabeSheet25()
+        {
+            List<Item_mast> itemlist = new List<Item_mast>
+            {
+                new Item_mast { ItemId = 1, ItemDes = "Biscuit  " },
+                new Item_mast { ItemId = 2, ItemDes = "Chocolate" },
+                new Item_mast { ItemId = 3, ItemDes = "Butter   " },
+                new Item_mast { ItemId = 4, ItemDes = "Brade    " },
+                new Item_mast { ItemId = 5, ItemDes = "Honey    " }
+            };
+        
+            List<Purchase> purchlist = new List<Purchase>
+            {
+                new Purchase { InvNo=100, ItemId = 3,  PurQty = 800 },
+                new Purchase { InvNo=101, ItemId = 2,  PurQty = 650 },
+                new Purchase { InvNo=102, ItemId = 3,  PurQty = 900 },
+                new Purchase { InvNo=103, ItemId = 4,  PurQty = 700 },
+                new Purchase { InvNo=104, ItemId = 3,  PurQty = 900 },
+                new Purchase { InvNo=105, ItemId = 4,  PurQty = 650 },
+                new Purchase { InvNo=106, ItemId = 1,  PurQty = 458 }
+            };
+
+
+            var innerjoin = from i in itemlist
+                            join p in purchlist
+                            on i.ItemId equals p.ItemId
+                            select new
+                            {
+                                a = i.ItemId,
+                                b = i.ItemDes,
+                                c = p.PurQty
+                            };
+
+            Console.WriteLine("Item ID\t\tItem Name\tPurchase Quantity");
+            Console.WriteLine("--------------------------------------------------");
+
+            foreach (var data in innerjoin)
+            {
+                Console.WriteLine(data.a + "\t\t" + data.b + "\t" + data.c);
+            }
+        }
+        static void AufgabeSheet26()
+        {
+            List<Item_mast> itemlist = new List<Item_mast>
+            {
+                new Item_mast { ItemId = 1, ItemDes = "Biscuit  " },
+                new Item_mast { ItemId = 2, ItemDes = "Chocolate" },
+                new Item_mast { ItemId = 3, ItemDes = "Butter   " },
+                new Item_mast { ItemId = 4, ItemDes = "Brade    " },
+                new Item_mast { ItemId = 5, ItemDes = "Honey    " }
+            };
+
+            List<Purchase> purchlist = new List<Purchase>
+            {
+                new Purchase { InvNo=100, ItemId = 3,  PurQty = 800 },
+                new Purchase { InvNo=101, ItemId = 2,  PurQty = 650 },
+                new Purchase { InvNo=102, ItemId = 3,  PurQty = 900 },
+                new Purchase { InvNo=103, ItemId = 4,  PurQty = 700 },
+                new Purchase { InvNo=104, ItemId = 3,  PurQty = 900 },
+                new Purchase { InvNo=105, ItemId = 4,  PurQty = 650 },
+                new Purchase { InvNo=106, ItemId = 1,  PurQty = 458 }
+            };
+
+            var result = from i in itemlist
+                         join p in purchlist
+                         on i.ItemId equals p.ItemId into iGroup
+                         from p in iGroup.DefaultIfEmpty()
+                         select new
+                         {
+                             a = i.ItemId,
+                             b = i.ItemDes,
+                             c = p == null ? 0 : p.PurQty
+                         };
+
+            foreach (var data in result) 
+            {
+                Console.WriteLine(data.a + "\t\t" + data.b + "\t" + data.c);
+            }
+        }
+        static void AufgabeSheet27()
+        {
+
+        }
+        static void AufgabeSheet28()
+        {
+            string[] cities =
+            {
+                "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI", "PARIS"
+            };
+
+            var query = from s in cities
+                        orderby s.Length
+                        select s;
+
+            foreach(var c in query)
+            {
+                Console.WriteLine(c);
+            }
+
+
+        }
+        static void AufgabeSheet29()
+        {
+            string[] cities =
+            {
+                "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI", "PARIS"
+            };
         }
     }
 }
