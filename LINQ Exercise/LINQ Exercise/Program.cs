@@ -33,8 +33,10 @@ namespace LINQ_Exercise
             //AufgabeSheet22();
             //AufgabeSheet25();
             //AufgabeSheet26();
-            //AufgabeSheet27();
-            AufgabeSheet28();
+            AufgabeSheet27();
+            //AufgabeSheet28();
+            //AufgabeSheet29();
+            //AufgabeSheet30();
         }
         static void Aufgabe1()
         {
@@ -518,13 +520,50 @@ namespace LINQ_Exercise
         }
         static void AufgabeSheet27()
         {
+            List<Item_mast> itemlist = new List<Item_mast>
+            {
+                new Item_mast { ItemId = 1, ItemDes = "Biscuit  " },
+                new Item_mast { ItemId = 2, ItemDes = "Chocolate" },
+                new Item_mast { ItemId = 3, ItemDes = "Butter   " },
+                new Item_mast { ItemId = 4, ItemDes = "Brade    " },
+                new Item_mast { ItemId = 5, ItemDes = "Honey    " }
+            };
+
+            List<Purchase> purchlist = new List<Purchase>
+            {
+                new Purchase { InvNo=100, ItemId = 3,  PurQty = 800 },
+                new Purchase { InvNo=101, ItemId = 5,  PurQty = 650 },
+                new Purchase { InvNo=102, ItemId = 3,  PurQty = 900 },
+                new Purchase { InvNo=103, ItemId = 4,  PurQty = 700 },
+                new Purchase { InvNo=104, ItemId = 3,  PurQty = 900 },
+                new Purchase { InvNo=105, ItemId = 4,  PurQty = 650 },
+                new Purchase { InvNo=106, ItemId = 1,  PurQty = 458 }
+            };
+
+            var result = from p in purchlist
+                         join i in itemlist
+                         on p.ItemId equals i.ItemId 
+                         into z
+                         from b in z.DefaultIfEmpty()
+                         select new
+                         {
+                             a = b.ItemId,
+                             b = b.ItemDes,
+                             //c = p == null ? 0 : p.PurQty
+                             c = p.PurQty
+                         };
+
+            foreach (var data in result)
+            {
+                Console.WriteLine(data.a + "\t\t" + data.b + "\t" + data.c);
+            }
 
         }
         static void AufgabeSheet28()
         {
             string[] cities =
             {
-                "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI", "PARIS"
+                "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI", "PARIS", "NEY YORK"
             };
 
             var query = from s in cities
@@ -542,8 +581,52 @@ namespace LINQ_Exercise
         {
             string[] cities =
             {
-                "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI", "PARIS"
+                "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI", "PARIS", "NEW YORK"
             };
+
+            var query = from city in Enumerable.Range(0, cities.Length)
+                        group cities[city] by city / 3;
+
+            foreach (var x in query)
+                cityView(string.Join("; ", x.ToArray()));
+
+        }
+        static void cityView(string xyz)
+        {
+            Console.WriteLine(xyz);
+            Console.WriteLine("-- here is a group of cities --\n");
+        }
+        static void AufgabeSheet30()
+        {
+            var query = (from c in Item_Mast.GetItemMast()
+                        select c.ItemDes)
+                        .Distinct()
+                        .OrderBy(x => x).ToList();
+                
+                
+                
+
+            foreach(var y in query)
+            {
+                Console.WriteLine(y);
+            }
+        }
+        class Item_Mast
+        {
+            public int ItemId { get; set; }
+            public string ItemDes { get; set; }
+
+            public static List<Item_Mast> GetItemMast()
+            {
+                List<Item_Mast> itemlist = new List<Item_Mast>();
+                itemlist.Add(new Item_Mast() { ItemId = 1, ItemDes = "Biscuit  " });
+                itemlist.Add(new Item_Mast() { ItemId = 2, ItemDes = "Honey    " });
+                itemlist.Add(new Item_Mast() { ItemId = 3, ItemDes = "Butter   " });
+                itemlist.Add(new Item_Mast() { ItemId = 4, ItemDes = "Brade    " });
+                itemlist.Add(new Item_Mast() { ItemId = 5, ItemDes = "Honey    " });
+                itemlist.Add(new Item_Mast() { ItemId = 6, ItemDes = "Biscuit  " });
+                return itemlist;
+            }
         }
     }
 }
